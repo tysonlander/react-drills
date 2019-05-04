@@ -2,20 +2,43 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+
+
 class App extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      filteredString: '',
+      foods: ['i', 'love', 'to', 'eat', 'ice cream', ' ', 'do', 'you', 'love', 'to', 'eat', 'ice cream']
+    };
+  }
+
+  handleChange(filter) {
+    this.setState({ filteredString: filter});
+  }
+
   render() {
+    let foodsToDisplay = this.state.foods
+    foodsToDisplay.filter((element, index) => {
+        return element.includes(this.state.filteredString);
+      });
+    foodsToDisplay.map((element, index) => {
+      return <h2 key={index}>{element}</h2>;
+    });
+
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <input onChange={e => this.handleChange(e.target.value)} type="text"/>
+        <div>
+        {foodsToDisplay}
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
-}
+} 
 
 export default App;
+
+
