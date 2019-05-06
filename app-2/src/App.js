@@ -1,22 +1,23 @@
-import React, { Component } from "react";
-// import logo from "./logo.svg";
-import "./App.css";
+import React, {Component} from 'react';
+import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-
+  constructor(){
+    super()
+  
     this.state = {
-      list: ['Harry', 'Potter', 'is', 'a book', 'must', 'read']
+      list: ['I', 'love', 'to', 'hike', 'and', 'cook']
     }
   }
-
-
-  render() {
-    let displayList = this.state.list.map((element, index) => {
+  render(){
+    let likes = this.state.list.map((element, index) => { 
       return <h2 key={index}>{element}</h2>;
     });
-    return <div className="App">{displayList}</div>;
+    return(
+      <div className='App'>
+        {likes}
+      </div>
+    )
   }
 }
 

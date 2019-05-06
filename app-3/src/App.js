@@ -1,44 +1,36 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-
-
+import React, {Component} from 'react';
+import './App.css';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
-    this.state = {
-      filteredString: '',
-      foods: ['i', 'love', 'to', 'eat', 'ice cream', ' ', 'do', 'you', 'love', 'to', 'eat', 'ice cream']
-    };
-  }
-
+  this.state = {
+    filterString: '',
+    favoriteThings: ['camping', 'travel', 'ice cream', 'movies', 'books', 'adventure books', 'vanilla ice cream']
+  };
+}
   handleChange(filter) {
-    this.setState({ filteredString: filter});
+    this.setState({filterString: filter})
   }
 
-  render() {
-    let foodsToDisplay = this.state.foods
-    foodsToDisplay.filter((element, index) => {
-        return element.includes(this.state.filteredString);
-      });
-    foodsToDisplay.map((element, index) => {
-      return <h2 key={index}>{element}</h2>;
+  render(){
+    let favoriteThingsToDisplay = this.state.favoriteThings.filter((element, index) => {
+      return element.includes(this.state.filterString)
+    })
+    .map((element, index) => {
+      return <h2 key={index}>{element}</h2>
     });
 
+    return(
+      <div className='App'>
+        <input type="text" onChange={e => this.handleChange(e.target.value)}/>
+        {favoriteThingsToDisplay}
 
-    return (
-      <div className="App">
-      <input onChange={e => this.handleChange(e.target.value)} type="text"/>
-        <div>
-        {foodsToDisplay}
-        </div>
       </div>
     );
   }
-} 
 
-export default App;
+}
 
-
+export default App

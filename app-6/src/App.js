@@ -1,54 +1,46 @@
-import React, { Component } from "react";
-import "./App.css";
-import Todo from "./Components/Todo"
+import React, {Component} from 'react';
+import './App.css';
+import Todo from './Components/Todo'
 
-class App extends Component { 
-  constructor() {
+class App extends Component {
+  constructor(){
     super();
 
     this.state = {
-      list: [],
-      input: ''
-    };  
-    this.handleToDoList = this.handleToDoList.bind(this);
+      input: '',
+      todos: []
+    }
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleInput(val){
-    this.setState({input: val})
+    this.setState({input: val});
   }
 
-  handleToDoList(){
+  handleAdd() {
     this.setState({
-      list: [...this.state.list, this.state.input],
+      todos: [...this.state.todos, this.state.input],
       input: ''
     });
   }
 
-
-
-  render() {
-    let list = this.state.list.map((element, index) => {
-      return <Todo key={index} task={element} />;
-    });
-    return (
+  render(){
+    const myList = this.state.todos.map((element, index) => {
+      return <Todo key={index} task={element}/>;
+    })
+    return(
       <div className='App'>
         <h1>My to-do list:</h1>
-
-        <div>
-          <input 
-            value={this.state.input}
-            placeholder="Enter new task"
-            onChange={e => this.handleInput(e.target.value)}
-            />
-
-            <button onClick={this.handleToDoList}>Add</button>
-        
-        </div>
+        <input 
+        value={this.state.input}
+        placeholder='enter an item'
+        onChange={e => this.handleInput(e.target.value)} 
+        />
+        <button onClick={this.handleAdd}>Add</button>
         <br/>
-        {list}
+        {myList}
       </div>
-    );
+    )
   }
 }
-
 export default App;
